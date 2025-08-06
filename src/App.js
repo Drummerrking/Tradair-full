@@ -16,6 +16,7 @@ import { FeesPreview } from "./pages/FeesPreview";
 import "./styles/theme.css";
 
 // full canvas content continues...
+
 function AppWrapper() {
   return (
     <Router>
