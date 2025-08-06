@@ -15,6 +15,28 @@ import { Notifications } from "./pages/Notifications";
 import { FeesPreview } from "./pages/FeesPreview";
 import "./styles/theme.css";
 
-// [Truncated body for clarity; assume full Canvas content inserted here]
+// full canvas content continues...
+function AppWrapper() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/post-grab" element={<PostGrab />} />
+        <Route path="/my-grabs" element={<MyGrabs />} />
+        <Route path="/my-offers" element={<MyOffers />} />
+        <Route path="/messaging" element={<Messaging />} />
+        <Route path="/support" element={<Support />} />
+        <Route path="/escrow" element={<Escrow />} />
+        <Route path="/verify" element={<VerifyIdentity />} />
+        <Route path="/ratings" element={<Ratings />} />
+        <Route path="/notifications" element={<Notifications />} />
+        <Route path="/fees" element={<FeesPreview />} />
+      </Routes>
+    </Router>
+  );
+}
 
 export default AppWrapper;

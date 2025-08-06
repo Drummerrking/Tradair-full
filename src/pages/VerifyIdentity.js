@@ -1,0 +1,5 @@
+import React from 'react';
+
+export function VerifyIdentity() {
+  return <div>VerifyIdentity Page</div>;
+}
