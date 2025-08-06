@@ -1,5 +1,5 @@
-// Tradair – Web App (Enhanced with Premium Features)
 
+// Tradair – Web App (Enhanced with Premium Features)
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { Dashboard } from "./pages/Dashboard";
@@ -25,4 +25,6 @@ import { DocumentVerification } from "./pages/DocumentVerification";
 import { CurrencyConverter } from "./pages/CurrencyConverter";
 import "./styles/theme.css";
 
-// ... [APPWRAPPER, HOME, LOGIN, SIGNUP, ROUTES, EXPORT] ...
+// ...component code omitted for brevity...
+
+export default AppWrapper;

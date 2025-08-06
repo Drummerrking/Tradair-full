@@ -1,9 +1,4 @@
+# Tradair
 
-# Tradair App
-
-To test locally:
-1. Run `npm install`
-2. Run `npm start`
-
-To deploy:
-- Upload to GitHub and connect via Vercel
+Deployed via Vercel.
+Run `npm install` then `npm start` to test locally.
