@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export function Dashboard() {
@@ -17,7 +18,7 @@ export function Dashboard() {
           {userGrabs.length > 0 ? (
             <ul className="list-disc list-inside">
               {userGrabs.map((grab, index) => (
-                <li key={index}>{grab.itemName} - {grab.destination}</li>
+                <li key={index}>{grab.itemName} – {grab.destination}</li>
               ))}
             </ul>
           ) : (
@@ -29,7 +30,7 @@ export function Dashboard() {
           {userOffers.length > 0 ? (
             <ul className="list-disc list-inside">
               {userOffers.map((offer, index) => (
-                <li key={index}>{offer.itemName} - ${offer.price}</li>
+                <li key={index}>{offer.itemName} – ${offer.price}</li>
               ))}
             </ul>
           ) : (

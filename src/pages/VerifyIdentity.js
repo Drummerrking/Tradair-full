@@ -1,5 +1,1 @@
-import React from 'react';
-
-export function VerifyIdentity() {
-  return <div>VerifyIdentity Page</div>;
-}
+import React from 'react'; export function VerifyIdentity() { return <div>VerifyIdentity Page</div>; }

@@ -1,5 +1,1 @@
-import React from 'react';
-
-export function MyGrabs() {
-  return <div>MyGrabs Page</div>;
-}
+import React from 'react'; export function MyGrabs() { return <div>MyGrabs Page</div>; }

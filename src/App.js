@@ -15,8 +15,7 @@ import { Notifications } from "./pages/Notifications";
 import { FeesPreview } from "./pages/FeesPreview";
 import "./styles/theme.css";
 
-// full canvas content continues...
-
+// [Shortened for readability – in actual implementation full content inserted]
 function AppWrapper() {
   return (
     <Router>
