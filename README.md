@@ -1,3 +1,3 @@
 # Tradair App
 
-React-based delivery app with Grabr-level features.
+React-based delivery platform with Grabr-level and enhanced features.
