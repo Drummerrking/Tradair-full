@@ -1,16 +1,9 @@
-# Tradair Web App
 
-This is a React-based clone of a peer-to-peer delivery platform similar to Grabr.
+# Tradair App
 
-## How to Run Locally
+A simple React app for peer-to-peer delivery platform testing.
 
-1. Unzip this folder.
-2. Open terminal inside the folder and run:
-   npm install
-   npm start
-
-Visit: http://localhost:3000
-
-## Deploying
-
-Use GitHub + Vercel for static deployment. Ensure vercel.json is present to handle SPA routes.
+## To run locally:
+1. Unzip the project
+2. Run `npm install`
+3. Run `npm start`
