@@ -1,1 +1,5 @@
-import React from 'react'; export function Messaging() { return <div>Messaging Page</div>; }
+
+import React from 'react';
+export function Messaging() {
+  return <div>Messaging Page</div>;
+}
