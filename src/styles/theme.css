@@ -1,1 +1,20 @@
-body { font-family: sans-serif; background: #f9f9f9; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f4f6f8;
+  color: #333;
+}
+button {
+  transition: all 0.3s ease;
+}
+button:hover {
+  transform: scale(1.03);
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+}
