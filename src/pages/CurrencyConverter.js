@@ -1,9 +1,11 @@
+
 import React from 'react';
+
 export function CurrencyConverter() {
   return (
-    <div className='p-6 text-gray-800'>
-      <h1 className='text-2xl font-bold'>CurrencyConverter</h1>
-      <p>This is the fully styled and connected CurrencyConverter page.</p>
+    <div className='p-6'>
+      <h1 className='text-3xl font-bold text-gray-800'>CurrencyConverter</h1>
+      <p className='text-gray-600 mt-2'>Welcome to the CurrencyConverter page.</p>
     </div>
   );
 }

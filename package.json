@@ -1,15 +1,20 @@
 {
-  "name": "tradair-full-app",
+  "name": "tradair-final",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1"
+    "react-router-dom": "^6.22.2",
+    "react-icons": "^4.10.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
   }
 }

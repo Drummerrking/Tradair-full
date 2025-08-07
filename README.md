@@ -1,5 +1,6 @@
-# Tradair Investor Demo
+# Tradair Final Investor Release
 
-🚀 Fully styled, 26-page app demo for investor presentation.
-✅ Routing, layout, UI, and polish.
-Ready to deploy.
+✔ 26 pages
+✔ Full routing
+✔ Tailwind UI
+✔ Deploy-ready
