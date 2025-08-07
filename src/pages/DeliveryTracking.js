@@ -1,11 +1,11 @@
 
 import React from "react";
 
-export function Ratings() {
+export function DeliveryTracking() {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-4">
-      <h2 className="text-2xl font-bold">R A T I N G S</h2>
-      <p>This is the full layout for the R A T I N G S feature page.</p>
+      <h2 className="text-2xl font-bold">D E L I V E R Y  T R A C K I N G</h2>
+      <p>This is the full layout for the D E L I V E R Y  T R A C K I N G feature page.</p>
       <div className="border p-4 rounded bg-white shadow">
         <label className="block mb-2">Sample Input</label>
         <input className="border p-2 w-full rounded mb-4" placeholder="Type something..." />

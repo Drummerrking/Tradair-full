@@ -1,10 +1,16 @@
-import React from 'react';
+
+import React from "react";
 
 export function TranslationAssistant() {
   return (
-    <div className="p-8 text-center">
-      <h1 className="text-2xl font-bold mb-4">Translation Assistant Page</h1>
-      <p>This is a placeholder for the Translation Assistant feature. You can expand it with real data and UI later.</p>
+    <div className="p-6 max-w-4xl mx-auto space-y-4">
+      <h2 className="text-2xl font-bold">T R A N S L A T I O N  A S S I S T A N T</h2>
+      <p>This is the full layout for the T R A N S L A T I O N  A S S I S T A N T feature page.</p>
+      <div className="border p-4 rounded bg-white shadow">
+        <label className="block mb-2">Sample Input</label>
+        <input className="border p-2 w-full rounded mb-4" placeholder="Type something..." />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
+      </div>
     </div>
   );
 }

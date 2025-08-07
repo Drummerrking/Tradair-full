@@ -1,23 +1,15 @@
 
-import React from 'react';
+import React from "react";
 
 export function Dashboard() {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="card">
-          <h2 className="text-xl font-semibold mb-2">Grabs</h2>
-          <p>12 Active Grabs</p>
-        </div>
-        <div className="card">
-          <h2 className="text-xl font-semibold mb-2">Offers</h2>
-          <p>8 New Offers</p>
-        </div>
-        <div className="card">
-          <h2 className="text-xl font-semibold mb-2">Messages</h2>
-          <p>3 Unread</p>
-        </div>
+    <div className="p-6 max-w-4xl mx-auto space-y-4">
+      <h2 className="text-2xl font-bold">D A S H B O A R D</h2>
+      <p>This is the full layout for the D A S H B O A R D feature page.</p>
+      <div className="border p-4 rounded bg-white shadow">
+        <label className="block mb-2">Sample Input</label>
+        <input className="border p-2 w-full rounded mb-4" placeholder="Type something..." />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
       </div>
     </div>
   );
