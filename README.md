@@ -1,7 +1,5 @@
-# Tradair - Final Complete App
+# Tradair Investor Demo
 
-All 26 pages fully integrated.
-
-- Built with React + Tailwind
-- Connected with routing
-- Ready for Vercel deployment
+🚀 Fully styled, 26-page app demo for investor presentation.
+✅ Routing, layout, UI, and polish.
+Ready to deploy.
