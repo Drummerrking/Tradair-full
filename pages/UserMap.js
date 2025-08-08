@@ -1,0 +1,1 @@
+export default function UserMap() { return <div>UserMap Page</div>; }

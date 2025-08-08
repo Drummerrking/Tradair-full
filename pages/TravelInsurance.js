@@ -1,0 +1,1 @@
+export default function TravelInsurance() { return <div>TravelInsurance Page</div>; }

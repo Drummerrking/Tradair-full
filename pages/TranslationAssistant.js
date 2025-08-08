@@ -1,0 +1,1 @@
+export default function TranslationAssistant() { return <div>TranslationAssistant Page</div>; }
