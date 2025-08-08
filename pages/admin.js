@@ -53,42 +53,41 @@ export default function AdminPage() {
         <ul>
           {requests.map((r) => (
             <li key={r.id} className="bg-white p-4 mb-2 rounded shadow">
-              <strong>{r.product}</strong> — Status: {r.status}<br />
-              Shopper: {r.userId}<br />
-              Traveler: {r.travelerId || "Not assigned"}<br />
-              <button
-                onClick={async () => {
-                  const ref = doc(db, "requests", r.id);
-                  await updateDoc(ref, { dispute: true });
-                  alert(`Request ${r.id} flagged as disputed.`);
-                }}
-                className="mt-2 bg-yellow-200 text-yellow-800 px-3 py-1 rounded hover:bg-yellow-300"
-              >
-                Flag for Dispute
-              </button>
-              <br />
-              Rating: {r.rating || "Not rated yet"} ★
-              <br />
-              Review: {r.review || "No review"}
-              <br />
-              {r.dispute && (
-                <p className="text-red-600 text-sm mt-1">⚠️ Disputed</p>
-              )}
-              <button
-                onClick={async () => {
-                  const ref = doc(db, "requests", r.id);
-                  await deleteDoc(ref);
-                  alert("Request deleted.");
-                }}
-                className="mt-2 ml-2 bg-red-200 text-red-800 px-3 py-1 rounded hover:bg-red-300"
-              >
-                Delete Request
-              </button>
-            </li>
+  <strong>{r.product}</strong> — Status: {r.status}<br />
+  Shopper: {r.userId}<br />
+  Traveler: {r.travelerId || "Not assigned"}<br />
+  <button
+    onClick={async () => {
+    const ref = doc(db, "requests", r.id);
+    await updateDoc(ref, { dispute: true });
+    alert(`Request ${r.id} flagged as disputed.`);
+  }}
+    className="mt-2 bg-yellow-200 text-yellow-800 px-3 py-1 rounded hover:bg-yellow-300"
+  >
+    Flag for Dispute
+  </button>
+  <br />
+  Rating: {r.rating || "Not rated yet"} ★
+  <br />
+  Review: {r.review || "No review"}
+  <br />
+  {r.dispute && (
+    <p className="text-red-600 text-sm mt-1">⚠️ Disputed</p>
+  )}
+  <button
+    onClick={async () => {
+      const ref = doc(db, "requests", r.id);
+      await deleteDoc(ref);
+      alert("Request deleted.");
+    }}
+    className="mt-2 ml-2 bg-red-200 text-red-800 px-3 py-1 rounded hover:bg-red-300"
+  >
+    Delete Request
+  </button>
           ))}
         </ul>
       )}
-      <h2 className="text-xl font-bold mt-10 mb-4">Users</h2>
+    <h2 className="text-xl font-bold mt-10 mb-4">Users</h2>
       <UserList />
 
       <h2 className="text-xl font-bold mt-10 mb-4">Traveler Profiles</h2>
@@ -135,6 +134,7 @@ function UserList() {
     </ul>
   );
 }
+
 
 function TravelerProfiles() {
   const [travelers, setTravelers] = useState([]);
