@@ -24,6 +24,16 @@ export default function AdminPage() {
       const querySnapshot = await getDocs(collection(db, "requests"));
       const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setRequests(data);
+
+      // Auto-expire old requests (older than 7 days, example)
+      const now = Date.now();
+      const expirationThreshold = 7 * 24 * 60 * 60 * 1000;
+      data.forEach(async (req) => {
+        if (req.createdAt && now - req.createdAt.toMillis() > expirationThreshold && req.status !== "expired") {
+          const ref = doc(db, "requests", req.id);
+          await updateDoc(ref, { status: "expired" });
+        }
+      });
       setLoading(false);
     };
 
@@ -43,37 +53,46 @@ export default function AdminPage() {
         <ul>
           {requests.map((r) => (
             <li key={r.id} className="bg-white p-4 mb-2 rounded shadow">
-  <strong>{r.product}</strong> — Status: {r.status}<br />
-  Shopper: {r.userId}<br />
-  Traveler: {r.travelerId || "Not assigned"}<br />
-  <button
-    onClick={async () => {
-    const ref = doc(db, "requests", r.id);
-    await updateDoc(ref, { dispute: true });
-    alert(`Request ${r.id} flagged as disputed.`);
-  }}
-    className="mt-2 bg-yellow-200 text-yellow-800 px-3 py-1 rounded hover:bg-yellow-300"
-  >
-    Flag for Dispute
-  </button>
-  {r.dispute && (
-    <p className="text-red-600 text-sm mt-1">⚠️ Disputed</p>
-  )}
-  <button
-    onClick={async () => {
-      const ref = doc(db, "requests", r.id);
-      await deleteDoc(ref);
-      alert("Request deleted.");
-    }}
-    className="mt-2 ml-2 bg-red-200 text-red-800 px-3 py-1 rounded hover:bg-red-300"
-  >
-    Delete Request
-  </button>
+              <strong>{r.product}</strong> — Status: {r.status}<br />
+              Shopper: {r.userId}<br />
+              Traveler: {r.travelerId || "Not assigned"}<br />
+              <button
+                onClick={async () => {
+                  const ref = doc(db, "requests", r.id);
+                  await updateDoc(ref, { dispute: true });
+                  alert(`Request ${r.id} flagged as disputed.`);
+                }}
+                className="mt-2 bg-yellow-200 text-yellow-800 px-3 py-1 rounded hover:bg-yellow-300"
+              >
+                Flag for Dispute
+              </button>
+              <br />
+              Rating: {r.rating || "Not rated yet"} ★
+              <br />
+              Review: {r.review || "No review"}
+              <br />
+              {r.dispute && (
+                <p className="text-red-600 text-sm mt-1">⚠️ Disputed</p>
+              )}
+              <button
+                onClick={async () => {
+                  const ref = doc(db, "requests", r.id);
+                  await deleteDoc(ref);
+                  alert("Request deleted.");
+                }}
+                className="mt-2 ml-2 bg-red-200 text-red-800 px-3 py-1 rounded hover:bg-red-300"
+              >
+                Delete Request
+              </button>
+            </li>
           ))}
         </ul>
       )}
-    <h2 className="text-xl font-bold mt-10 mb-4">Users</h2>
+      <h2 className="text-xl font-bold mt-10 mb-4">Users</h2>
       <UserList />
+
+      <h2 className="text-xl font-bold mt-10 mb-4">Traveler Profiles</h2>
+      <TravelerProfiles />
     </div>
   );
 }
@@ -111,6 +130,33 @@ function UserList() {
               Ban User
             </button>
           )}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function TravelerProfiles() {
+  const [travelers, setTravelers] = useState([]);
+
+  useEffect(() => {
+    const fetchTravelers = async () => {
+      const snapshot = await getDocs(collection(db, "users"));
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      const filtered = data.filter(u => u.role === "traveler");
+      setTravelers(filtered);
+    };
+    fetchTravelers();
+  }, []);
+
+  return (
+    <ul>
+      {travelers.map((t) => (
+        <li key={t.id} className="bg-white p-3 mb-2 rounded shadow">
+          <strong>{t.name || t.email || t.id}</strong><br />
+          Bio: {t.bio || "No bio yet"}<br />
+          Countries: {t.countries?.join(", ") || "None listed"}<br />
+          Rating: {t.rating || "Not rated"} ★
         </li>
       ))}
     </ul>
