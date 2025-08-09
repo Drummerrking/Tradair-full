@@ -1,1 +1,0 @@
-export default function VerifyIdentity() { return <div>VerifyIdentity Page</div>; }
