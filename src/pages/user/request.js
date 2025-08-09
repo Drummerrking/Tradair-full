@@ -1,4 +1,4 @@
-// pages/user/request.js
+// src/pages/user/request.js
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { doc, getDoc } from "firebase/firestore";
@@ -15,9 +15,7 @@ export default function RequestPage() {
     const fetchRequest = async () => {
       const ref = doc(db, "requests", id);
       const snapshot = await getDoc(ref);
-      if (snapshot.exists()) {
-        setRequest({ id: snapshot.id, ...snapshot.data() });
-      }
+      if (snapshot.exists()) setRequest({ id: snapshot.id, ...snapshot.data() });
     };
     fetchRequest();
   }, [id]);
@@ -31,7 +29,7 @@ export default function RequestPage() {
         <p><strong>Product:</strong> {request.product}</p>
         <p><strong>Status:</strong> {request.status}</p>
         <p><strong>Traveler:</strong> {request.travelerId || "Not assigned"}</p>
-        <p><strong>Created:</strong> {request.createdAt?.toDate().toLocaleString() || "Unknown"}</p>
+        <p><strong>Created:</strong> {request.createdAt?.toDate?.().toLocaleString?.() || "Unknown"}</p>
       </div>
 
       {request.status === "delivered" && !request.rating && (
