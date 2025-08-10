@@ -1,9 +1,9 @@
 // src/pages/user/request.js
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
-import RateDelivery from "@/components/RateDelivery";
+import { db } from "../../lib/firebase";
+import RateDelivery from "../../components/RateDelivery";
 
 export default function RequestPage() {
   const router = useRouter();
@@ -13,9 +13,9 @@ export default function RequestPage() {
   useEffect(() => {
     if (!id) return;
     const fetchRequest = async () => {
-      const ref = doc(db, "requests", id);
-      const snapshot = await getDoc(ref);
-      if (snapshot.exists()) setRequest({ id: snapshot.id, ...snapshot.data() });
+      const ref = doc(db, "requests", String(id));
+      const snap = await getDoc(ref);
+      if (snap.exists()) setRequest({ id: snap.id, ...snap.data() });
     };
     fetchRequest();
   }, [id]);
@@ -28,7 +28,7 @@ export default function RequestPage() {
       <div className="bg-white rounded shadow p-4 mb-6">
         <p><strong>Product:</strong> {request.product}</p>
         <p><strong>Status:</strong> {request.status}</p>
-        <p><strong>Traveler:</strong> {request.travelerId || "Not assigned"}</p>
+        <p><strong>Traveler:</strong> {request.travelerId || "Unassigned"}</p>
         <p><strong>Created:</strong> {request.createdAt?.toDate?.().toLocaleString?.() || "Unknown"}</p>
       </div>
 
@@ -39,7 +39,7 @@ export default function RequestPage() {
       {request.rating && (
         <div className="bg-green-50 border-l-4 border-green-400 p-4 mt-4">
           <p className="text-green-700">✅ You rated this delivery: <strong>{request.rating} ★</strong></p>
-          <p className="mt-2 italic">"{request.review}"</p>
+          {request.review ? <p className="mt-2 italic">"{request.review}"</p> : null}
         </div>
       )}
     </div>
