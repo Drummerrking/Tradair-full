@@ -1,7 +1,7 @@
 // src/components/RateDelivery.js
 import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
-import { db } from "@/lib/firebase";
+import { db } from "../lib/firebase";
 
 export default function RateDelivery({ requestId }) {
   const [rating, setRating] = useState(0);
@@ -9,10 +9,18 @@ export default function RateDelivery({ requestId }) {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
-    if (!rating || !review) return alert("Please provide both a rating and review.");
-    const ref = doc(db, "requests", requestId);
-    await updateDoc(ref, { rating, review });
-    setSubmitted(true);
+    if (!rating || !review) {
+      alert("Please provide both a rating and a written review.");
+      return;
+    }
+    try {
+      const ref = doc(db, "requests", String(requestId));
+      await updateDoc(ref, { rating, review });
+      setSubmitted(true);
+    } catch (e) {
+      console.error("Failed to save review", e);
+      alert("Sorry, something went wrong saving your review.");
+    }
   };
 
   if (submitted) return <p className="text-green-600">✅ Thank you for your review!</p>;
