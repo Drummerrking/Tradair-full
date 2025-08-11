@@ -1,45 +1,33 @@
-// src/pages/travelers.js
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
 import { db } from "../lib/firebase";
-import Layout from "../components/Layout";
+import { collection, getDocs } from "firebase/firestore";
 
-export default function TravelersPage() {
-  const [travelers, setTravelers] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function Travelers() {
+  const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    const run = async () => {
-      try {
-        const snap = await getDocs(collection(db, "users"));
-        const rows = snap.docs.map(d => ({ id: d.id, ...d.data() }))
-          .filter(u => u.role === "traveler");
-        setTravelers(rows);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setLoading(false);
-      }
+    const load = async () => {
+      const snap = await getDocs(collection(db, "users"));
+      const all = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      setRows(all.filter(u => u.role === "traveler"));
     };
-    run();
+    load();
   }, []);
 
   return (
-    <Layout title="Browse Travelers • Tradair">
-      <h1 className="text-2xl font-bold mb-4">Browse Travelers</h1>
-      {loading ? <p>Loading travelers...</p> : (
-        <div className="grid md:grid-cols-2 gap-4">
-          {travelers.length === 0 && <p>No travelers yet.</p>}
-          {travelers.map(t => (
-            <div key={t.id} className="bg-white rounded-xl p-4 shadow">
-              <h3 className="font-semibold">{t.name || t.email || "Traveler"}</h3>
-              <p className="text-gray-600 mt-1">Bio: {t.bio || "—"}</p>
-              <p className="text-gray-600 mt-1">Routes: {Array.isArray(t.countries) ? t.countries.join(", ") : "—"}</p>
-              <p className="text-gray-600 mt-1">Rating: {t.rating || "Not rated"} ★</p>
-            </div>
+    <div style={{padding:'24px', fontFamily:'ui-sans-serif, system-ui'}}>
+      <h1 style={{fontSize:24, fontWeight:700}}>Travelers</h1>
+      {!rows.length ? <p>No travelers yet.</p> : (
+        <ul style={{marginTop:12}}>
+          {rows.map(t => (
+            <li key={t.id} style={{padding:12, border:'1px solid #eee', borderRadius:8, marginBottom:8}}>
+              <strong>{t.name || t.email || t.id}</strong><br/>
+              Bio: {t.bio || "—"}<br/>
+              Countries: {t.countries?.join(", ") || "—"}
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </Layout>
+    </div>
   );
 }

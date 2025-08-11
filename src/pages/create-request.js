@@ -1,35 +1,29 @@
-// src/pages/create-request.js
 import { useState } from "react";
 import { db } from "../lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import Layout from "../components/Layout";
+import { useRouter } from "next/router";
 
-export default function CreateRequestPage() {
-  const [form, setForm] = useState({
-    product: "",
-    url: "",
-    price: "",
-    origin: "",
-    destination: "",
-  });
+export default function CreateRequest() {
+  const [form, setForm] = useState({ product: "", url: "", price: "" });
   const [saving, setSaving] = useState(false);
-  const [createdId, setCreatedId] = useState(null);
+  const router = useRouter();
 
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.product) return alert("Please enter a product name");
+    if (!form.product || !form.price) return alert("Product and price are required.");
     setSaving(true);
     try {
-      const docRef = await addDoc(collection(db, "requests"), {
-        ...form,
-        price: Number(form.price || 0),
+      const ref = await addDoc(collection(db, "requests"), {
+        product: form.product,
+        url: form.url || null,
+        price: Number(form.price),
         status: "open",
-        createdAt: serverTimestamp(),
+        createdAt: serverTimestamp()
       });
-      setCreatedId(docRef.id);
-      setForm({ product: "", url: "", price: "", origin: "", destination: "" });
+      alert("Request created!");
+      router.push(`/user/request?id=${ref.id}`);
     } catch (e) {
       console.error(e);
       alert("Failed to create request");
@@ -39,44 +33,25 @@ export default function CreateRequestPage() {
   };
 
   return (
-    <Layout title="Create Request • Tradair">
-      <h1 className="text-2xl font-bold mb-4">Create a Request</h1>
-      <form onSubmit={submit} className="bg-white p-5 rounded-xl shadow grid md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium">Product</label>
-          <input name="product" value={form.product} onChange={onChange} className="w-full border rounded p-2" placeholder="Nintendo Switch OLED" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Store URL</label>
-          <input name="url" value={form.url} onChange={onChange} className="w-full border rounded p-2" placeholder="https://example.com/product" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Price (USD)</label>
-          <input name="price" type="number" value={form.price} onChange={onChange} className="w-full border rounded p-2" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Origin (City, Country)</label>
-          <input name="origin" value={form.origin} onChange={onChange} className="w-full border rounded p-2" placeholder="Miami, USA" />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Destination (City, Country)</label>
-          <input name="destination" value={form.destination} onChange={onChange} className="w-full border rounded p-2" placeholder="Nassau, Bahamas" />
-        </div>
-        <div className="md:col-span-2">
-          <button disabled={saving} className="bg-blue-600 text-white px-5 py-2 rounded hover:bg-blue-700 disabled:opacity-50">
-            {saving ? "Saving..." : "Post Request"}
-          </button>
-        </div>
+    <div style={{padding:'24px', fontFamily:'ui-sans-serif, system-ui'}}>
+      <h1 style={{fontSize:24, fontWeight:700}}>Create a Request</h1>
+      <form onSubmit={submit} style={{marginTop:12, maxWidth:520}}>
+        <label>Product<br/>
+          <input name="product" value={form.product} onChange={onChange} style={{width:'100%', padding:8, border:'1px solid #ddd', borderRadius:8}}/>
+        </label>
+        <br/><br/>
+        <label>Product URL (optional)<br/>
+          <input name="url" value={form.url} onChange={onChange} style={{width:'100%', padding:8, border:'1px solid #ddd', borderRadius:8}}/>
+        </label>
+        <br/><br/>
+        <label>Price (USD)<br/>
+          <input name="price" type="number" value={form.price} onChange={onChange} style={{width:'100%', padding:8, border:'1px solid #ddd', borderRadius:8}}/>
+        </label>
+        <br/><br/>
+        <button disabled={saving} style={{padding:'10px 16px', borderRadius:8, background:'#2563eb', color:'#fff'}}>
+          {saving ? "Saving..." : "Create"}
+        </button>
       </form>
-
-      {createdId && (
-        <div className="bg-green-50 border-l-4 border-green-400 p-4 mt-4 rounded">
-          <p>✅ Request created.</p>
-          <p>
-            View it here: <a className="underline text-green-700" href={`/user/request?id=${createdId}`}>/user/request?id={createdId}</a>
-          </p>
-        </div>
-      )}
-    </Layout>
+    </div>
   );
 }
