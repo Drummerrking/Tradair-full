@@ -1,3 +1,4 @@
+// src/pages/_app.js
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "../styles/globals.css";
 
